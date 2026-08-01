@@ -6,10 +6,10 @@ Two experimental stages are explored in the notebooks in this repository:
 
 | Notebook | Approach | Test Accuracy | AUC-ROC |
 |---|---|---|---|
-| [Version 1](pneumonia-detection-tl-resnet50v2-version1.ipynb) | Fine-tuned last 30 layers of ResNet50V2 | 81% | **93%** |
-| [Version 2](pneumonia-detection-tl-resnet50v2-version2.ipynb) | Frozen backbone (feature extraction only) | 84% | **96%** |
+| [Version 1](pneumonia-detection-tl-resnet50v2-version1.ipynb) | Fine-tuned last 30 layers of ResNet50V2 | 82% | **92%** |
+| [Version 2](pneumonia-detection-tl-resnet50v2-version2.ipynb) | Frozen backbone (feature extraction only) | 86% | **97%** |
 
-> **Key finding:** Freezing the pretrained backbone (V2) generalized better than fine-tuning the last 30 layers (V1), improving AUC from **93% → 96%** while reducing overfitting.
+> **Key finding:** Freezing the pretrained backbone (V2) generalized better than fine-tuning the last 30 layers (V1), improving AUC from **92% → 97%** while reducing overfitting.
 
 ---
 
@@ -166,30 +166,30 @@ Applied on-the-fly to improve generalization:
 
 ## Results
 
-### Version 1 — Fine-tuned last 30 layers (AUC: 93%)
+### Version 1 — Fine-tuned last 30 layers (AUC: 92%)
 
-- **Test accuracy:** 81%
-- **AUC-ROC:** 0.93
-- **Pneumonia recall:** 99% (386 / 390)
-- **Normal recall:** 51% (114 / 234)
-- **False positives:** 120 normal images misclassified as pneumonia
+- **Test accuracy:** 82%
+- **AUC-ROC:** 0.92
+- **Pneumonia recall:** 98% (382 / 390)
+- **Normal recall:** 56% (132 / 234)
+- **False positives:** 102 normal images misclassified as pneumonia
 
-### Version 2 — Frozen backbone / feature extraction (AUC: 96%)
+### Version 2 — Frozen backbone / feature extraction (AUC: 97%)
 
-- **Test accuracy:** 84%
-- **AUC-ROC:** 0.96
+- **Test accuracy:** 86%
+- **AUC-ROC:** 0.97
 - **Pneumonia recall:** 98% (384 / 390)
-- **Normal recall:** 65% (83 / 234)
-- **False positives:** 151 normal images misclassified as pneumonia
+- **Normal recall:** 66% (154 / 234)
+- **False positives:** 80 normal images misclassified as pneumonia
 
 ### Summary table
 
 | Metric | V1 (Fine-tuned) | V2 (Feature extraction) |
 |---|---|---|
-| Test accuracy | 81% | 84% |
-| AUC-ROC | **93%** | **96%** |
-| Pneumonia recall | 99% | 98% |
-| Normal recall | 51% | 65% |
+| Test accuracy | 82% | 86% |
+| AUC-ROC | **92%** | **97%** |
+| Pneumonia recall | 98% | 98% |
+| Normal recall | 56% | 66% |
 
 Both models are biased toward predicting pneumonia, but the frozen-backbone model (V2) yields better generalization and a higher AUC, confirming that fine-tuning on this small, imbalanced dataset tends to overfit.
 
@@ -209,8 +209,8 @@ Both models are biased toward predicting pneumonia, but the frozen-backbone mode
 
 This project demonstrates the effectiveness of transfer learning for medical image classification.
 
-- Fine-tuning the backbone (V1) achieved 93% AUC but suffered from limited generalization.
-- Freezing the backbone (V2) achieved **96% AUC** with better generalization, making it the stronger approach for this task.
+- Fine-tuning the backbone (V1) achieved 92% AUC but suffered from limited generalization.
+- Freezing the backbone (V2) achieved **97% AUC** with better generalization, making it the stronger approach for this task.
 - Future improvements include backbone fine-tuning with stronger regularization, advanced imbalance-handling techniques, and threshold tuning to reduce false positives.
 
 ---
